@@ -20,8 +20,3 @@ Method | Route                 | Description
 `PUT`  | `/providers/:providerId/accounts`      | Add an account to the provider
 `DELETE`  | `/providers/:providerId/accounts/:accountId`      | Removes an account from the provider
 `PUT`  | `/accounts/:providerId/:accountId`      | Changes the field of the account provided by id
-
-
-ER Diagram
-![Blank board (1)](https://media.github.ncsu.edu/user/24486/files/344297ed-773e-48f6-8dc5-b6bcd505008f)
-
