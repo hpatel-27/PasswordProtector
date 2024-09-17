@@ -1,0 +1,348 @@
+html, body {
+    height: 100%; 
+    margin: 0; 
+    padding: 0;
+    background-color: #dddddd;
+}
+
+.btn.btn-primary.sidebar-btn:hover {
+    background-color: rgb(50, 50, 50);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+    /* background-color: rgb(87, 87, 87); */
+
+
+}
+
+.btn.btn-primary.sidebar-btn {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+    background-color: rgb(70, 70, 70);
+    display: flex;
+    flex-direction: row;
+}
+
+#weighticon,
+#dumbellicon {
+    padding-right: 4%;
+}
+.accounts {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.card {
+    margin-bottom: 5%;
+}
+
+.card-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-block .save-btn {
+    width: 50%; 
+    margin: 20px; 
+    display: block; 
+}
+
+.card-block p {
+    margin-bottom: 10px; 
+}
+
+.card-block input[type="text"],
+.card-block input[type="password"],
+.card-block textarea {
+    margin-bottom: 10px; 
+}
+
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: rgb(59 77 102 / 25%);
+    border: none;
+}
+
+
+.side .sidebar-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+
+.home-container {
+    display: flex;
+    flex-direction: row; 
+    background-color: #e4e4e4;
+}
+
+.side-bar {
+    background-color: rgb(226, 226, 226);
+    padding: 10px;
+    width: 15%; 
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* to enable scrolling if the content exceeds the height */
+}
+
+.main-content {
+    margin-left: 15%;
+    padding: 10px;
+    background-color: #d0d0d0c4;
+    width: 85%; 
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+    min-height: 100vh;
+
+}
+
+.main-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.site-name-btn,
+.del-provider-btn,
+.update-provider-btn {
+    width: 100%;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+.site-name-btn:hover, 
+.new-account-btn:hover,
+.del-provider-btn:hover,
+.update-provider-btn:hover,
+.new-group-btn:hover,
+.save-btn:hover,
+a.sidebar-btn:hover {
+    background-color: rgb(31, 31, 31);
+    
+}
+
+.sidebar .site {
+    background-color: rgb(49, 49, 48);
+    padding: 8px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border: 1px solid #dddddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+
+a.profile-btn {
+    width: 35%; 
+    font-size: 1.5rem;
+    margin-bottom: 10px; 
+    margin-left: 10%;
+    margin-right: 10%;
+    border: none;
+    border-radius: 5px; 
+    background-color: rgb(255, 217, 0);
+    /* Button background color */
+    color: white; 
+    cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+#profile-container:hover {
+    background-color: rgb(241, 205, 0);
+
+}
+.new-group-btn {
+    width: 50%; 
+    margin-bottom: 10px; 
+    margin-left: 25%;
+    margin-right: 25%;
+    border: none;
+    border-radius: 5px; 
+    background-color: rgb(49, 49, 48);
+    /* Button background color */
+    color: white; 
+    cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+.account-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+
+}
+
+.site-name-btn, .new-account-btn, .save-btn {
+    width: 20%; 
+    padding: 1%;
+    margin-bottom: 1%; 
+    border: none;
+    border-radius: 5px; 
+    background-color: rgb(49, 49, 48);
+ 
+    color: white; 
+    cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+  
+}
+
+.del-provider-btn, .update-provider-btn {
+    width: 30%; 
+    padding: 3%;
+    margin-bottom: 3%; 
+    border: none;
+    border-radius: 5px; 
+    background-color: rgb(49, 49, 48);
+ 
+    color: white; 
+    cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+.del-provider-btn {
+    margin-left: 9%;
+    margin-right: 20%;
+}
+.account-management {
+    background-color: rgb(226, 226, 226);
+
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+    
+
+}
+
+.account-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+
+
+.account-section {
+    background-color: rgb(226, 226, 226);
+
+    padding: 10px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    
+}
+
+.account-form {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+.account-form input[type="text"],
+.account-form input[type="password"],
+.account-form textarea {
+    width: 100%; 
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+.account-form button {
+    width: 100%; 
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(49, 49, 48);
+
+    color: white;
+    cursor: pointer;
+}
+
+.account-form label {
+    display: block; 
+    margin-bottom: 5px;
+}
+
+.input-notes {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    height: 60px;
+    resize: vertical;
+}
+
+
+
+.save-btn {
+    margin-top: 3%;
+    margin-right: 40%;
+}
+
+.del-provider-btn {
+    margin-top: 3%;
+}
+
+.sidebar-btn {
+    
+}
+
+@media (min-width: 768px) {
+    .account {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .account-section {
+        width: 48%; 
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px; 
+    }
+
+    .profile-btn, .new-group-btn, .site-name-btn, .new-account-btn, .save-btn {
+        padding: 8px; 
+        font-size: 0.875rem; 
+    }
+
+    .account-form input[type="text"],
+    .account-form input[type="password"],
+    .account-form textarea {
+        padding: 8px;
+        font-size: 0.875rem; 
+    }
+
+    .account-form label {
+        font-size: 0.875rem; 
+    }
+
+    .new-group-btn, .site-name-btn {
+        font-size: 0.75rem; 
+        padding: 8px 10px; 
+        margin-bottom: 5px; 
+        width: auto; 
+    }
+
+    .sidebar .site {
+        font-size: 0.75rem;
+        padding: 6px 8px;
+        margin-bottom: 4px; 
+    }
+}

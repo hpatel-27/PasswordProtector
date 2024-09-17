@@ -1,0 +1,65 @@
+header {
+    /* background-color: rgb(135, 202, 235); */
+    background-color: rgb(255, 217, 0);
+
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+    padding-bottom: 1%;
+    padding-top: 1%;
+
+}
+
+.main-header {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.main-header a {
+    margin: 0 auto;
+    background-color: rgba(127, 255, 212, 0);
+    border: none;
+
+}
+
+#logo-img {
+    border: none;
+}
+
+#logo-container:hover {
+    background-color: rgba(255, 255, 255, 0);
+    cursor: default;
+}
+
+.text-center {
+    padding: 8%;
+}
+
+body {
+    background-color: rgb(208, 214, 214);
+}
+
+main {
+    margin-top: 6%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+#signupBtn,
+#loginBtn {
+    /* background-color: rgb(100, 189, 234); */
+    background-color: rgb(49, 49, 48);
+    border: none;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+#signupBtn:hover,
+#loginBtn:hover {
+    /* background-color: rgb(86, 161, 198); */
+    background-color: rgb(31, 31, 31);
+
+    border: none;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+}

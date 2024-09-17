@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(208, 214, 214);
+
+}
+
+header {
+    background-color: rgb(255, 217, 0);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+    padding-bottom: 1%;
+    padding-top: 1%;
+
+}
+
+.main-header {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.main-header a {
+    margin: 0 auto;
+    background-color: rgba(127, 255, 212, 0);
+    border: none;
+
+}
+
+#logo-img {
+    border: none;
+}
+
+#logo-container:hover {
+    background-color: rgba(255, 255, 255, 0);
+    cursor: default;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    background-color: #fff;
+    padding: 9%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 60%;
+    width: 60%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 7%;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+p {
+    text-align: center;
+    margin-top: 15px;
+}
+
+#loginButton {
+    background-color: rgb(49, 49, 48);
+    border: none;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+#loginButton:hover {
+    background-color: rgb(31, 31, 31);
+    border: none;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+}

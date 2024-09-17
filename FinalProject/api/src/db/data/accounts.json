@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "username": "student1",
+        "password": "password1",
+        "notes": "message1"
+    },
+    {
+        "id": 2,
+        "username": "student2",
+        "password": "password2",
+        "notes": "message2"
+    },
+    {
+        "id": 3,
+        "username": "student3",
+        "password": "password3",
+        "notes": "message3"
+    },
+    {
+        "id": 4,
+        "username": "student4",
+        "password": "password4",
+        "notes": "message4"
+    },
+    {
+        "id": 5,
+        "username": "student5",
+        "password": "password5",
+        "notes": "message5"
+    },
+    {
+        "id": 6,
+        "username": "student6",
+        "password": "password6",
+        "notes": "message6"
+    },
+    {
+        "id": 7,
+        "username": "student7",
+        "password": "password7",
+        "notes": "message7"
+    },
+    {
+        "id": 8,
+        "username": "student8",
+        "password": "password8",
+        "notes": "message8"
+    },
+    {
+        "id": 9,
+        "username": "student9",
+        "password": "password9",
+        "notes": "message9"
+    },
+    {
+        "id": 10,
+        "username": "student10",
+        "password": "password10",
+        "notes": "message10"
+    }
+]

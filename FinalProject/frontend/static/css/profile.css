@@ -1,0 +1,143 @@
+html, body {
+  height: 100%; 
+  margin: 0; 
+  padding: 0;
+}
+
+.change-password-section {
+  text-align: center; 
+}
+
+.main-content {
+  text-align: center; 
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #dddddd;
+}
+
+.main-header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 6%;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column; 
+  background-color: #5094A9;
+  height: 100vh;
+  
+}
+
+
+.card-block {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.card-block .input-container {
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+a.profile-btn {
+  width: 35%; 
+  font-size: 1.5rem;
+  margin-bottom: 10px; 
+  margin-left: 10%;
+  margin-right: 10%;
+  border: none;
+  border-radius: 5px; 
+  background-color: rgb(255, 217, 0);
+  /* Button background color */
+  color: white; 
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+#profile-container:hover {
+  background-color: rgb(241, 205, 0);
+
+}
+
+.profile-info {
+  background-color: #ffffff;
+  padding: 7%;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  width: 45%;
+  align-content: center;
+  margin-left: 27%;
+
+}
+
+.password-input, .email-input {
+  width: 100%;
+  padding: 10px;
+  /* padding-right: 24rem; */
+  margin-right: 24rem;
+
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  /* margin-left: 50px; */
+}
+.username-input {
+  width: 100%;
+  padding: 10px;
+  /* padding-right: 24rem; */
+  margin-right: 24rem;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  /* margin-left: 50px; */
+}
+
+.sign-out-btn, .update-profile-btn {
+  display: block;
+  width: 30%;
+  padding: 10px;
+  margin-top: 3%;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(49, 49, 48);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+
+  color: white;
+  cursor: pointer;
+}
+
+.update-profile-btn {
+  margin-right: 39.8%;
+}
+
+@media (min-width: 768px) {
+  .profile-container {
+    flex-direction: row; 
+  }
+
+  .main-content {
+    width: 70%;
+  }
+}
+
+
+#sign-out:hover, #update-profile:hover {
+  background-color: rgb(31, 31, 31);
+}
+
+#logo-img {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#logo-container {
+  background-color: rgba(255, 255, 255, 0);
+  min-width: 7vw;
+  width: 7vw;
+}
