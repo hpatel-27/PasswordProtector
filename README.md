@@ -2,7 +2,8 @@
 
 Final Project for App Web Development
 
-Password Protector using JWT for auth, Express server, MariaDB, and Node.js
+Password storage software using JWT for auth, Express server, MariaDB for database entries, and Node.js
+Users may login and create entries for websites that they have made accounts for and can store those passwords. Since users may have multiple accounts for the same site, such as multiple Gmail accounts, we also allow for multiple stored entries for the same site.
 
 To run this program you will need to make a .env file in the Final Project folder after cloning it.
 
