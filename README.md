@@ -5,7 +5,7 @@ Final Project for App Web Development
 Password storage software using JWT for auth, Express server, MariaDB for database entries, and Node.js
 Users may login and create entries for websites that they have made accounts for and can store those passwords. Since users may have multiple accounts for the same site, such as multiple Gmail accounts, we also allow for multiple stored entries for the same site.
 
-There is also a list of all the API routes that were created to perform efficient data access operations:
+Here a list of all the API routes that were created to perform efficient data access operations:
 
 Method | Route                 | Description
 ------ | --------------------- | ---------
