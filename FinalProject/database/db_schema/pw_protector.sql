@@ -1,12 +1,39 @@
-CREATE TABLE IF NOT EXISTS `provider` (
-  `prv_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `prv_name` varchar(50) NOT NULL,
---   `prv_account` varchar(150) NOT NULL,
-  PRIMARY KEY (`prv_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Postgres schema + seed for Password Protector.
+-- Runs automatically on first init of an empty Postgres data volume.
 
-DELETE FROM `provider`;
-INSERT INTO `provider` (`prv_id`, `prv_name`) VALUES
+CREATE TABLE IF NOT EXISTS provider (
+  prv_id   SERIAL PRIMARY KEY,
+  prv_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS account (
+  act_id       SERIAL PRIMARY KEY,
+  act_username VARCHAR(64)  NOT NULL,
+  -- Widened beyond the original plaintext length to accommodate encrypted
+  -- account passwords (reversible AES ciphertext) added later.
+  act_password VARCHAR(512) NOT NULL,
+  act_notes    VARCHAR(280) NOT NULL,
+  prv_id       INTEGER NOT NULL REFERENCES provider (prv_id) ON DELETE CASCADE
+);
+
+-- "user" is a reserved word in Postgres, so it is always quoted.
+CREATE TABLE IF NOT EXISTS "user" (
+  usr_id       SERIAL PRIMARY KEY,
+  usr_username VARCHAR(64)  NOT NULL,
+  usr_password VARCHAR(127) NOT NULL,
+  usr_salt     VARCHAR(100) NOT NULL,
+  usr_email    VARCHAR(64)  NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS user_provider (
+  upr_usr_id INTEGER NOT NULL REFERENCES "user" (usr_id),
+  upr_prv_id INTEGER NOT NULL REFERENCES provider (prv_id) ON DELETE CASCADE,
+  PRIMARY KEY (upr_usr_id, upr_prv_id)
+);
+
+-- Seed data ----------------------------------------------------------------
+
+INSERT INTO provider (prv_id, prv_name) VALUES
     (1, 'amazon.com'),
     (2, 'spotify.com'),
     (3, 'facebook.com'),
@@ -28,18 +55,7 @@ INSERT INTO `provider` (`prv_id`, `prv_name`) VALUES
     (19, 'wordpress.org'),
     (20, 'yahoo.com');
 
-CREATE TABLE IF NOT EXISTS `account` (
-  `act_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `act_username` varchar(64) NOT NULL,
-  `act_password` varchar(127) NOT NULL,
-  `act_notes` varchar(280) NOT NULL,
-  `prv_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`act_id`),
-  CONSTRAINT `FK_ACCOUNT_PROVIDER` FOREIGN KEY (`prv_id`) REFERENCES `provider` (`prv_id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-DELETE FROM `account`;
-INSERT INTO `account` (`act_id`, `act_username`, `act_password`, `act_notes`, `prv_id`) VALUES
+INSERT INTO account (act_id, act_username, act_password, act_notes, prv_id) VALUES
     (1, 'username1', 'password1', 'message1', 1),
     (2, 'username2', 'password2', 'message2', 1),
     (3, 'username3', 'password3', 'message3', 2),
@@ -81,57 +97,32 @@ INSERT INTO `account` (`act_id`, `act_username`, `act_password`, `act_notes`, `p
     (39, 'username39', 'password39', 'message39', 20),
     (40, 'username40', 'password40', 'message40', 20);
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `usr_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `usr_username` varchar(64) NOT NULL,
-  `usr_password` varchar(127) NOT NULL,
-  `usr_salt` varchar(100) NOT NULL,
-  `usr_email` varchar(64) NOT NULL,
---   `usr_providers` varchar(150) DEFAULT NULL,
-  PRIMARY KEY (`usr_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-DELETE FROM `user`;
-INSERT INTO `user` (`usr_id`, `usr_username`, `usr_password`, `usr_salt`, `usr_email`) VALUES
+INSERT INTO "user" (usr_id, usr_username, usr_password, usr_salt, usr_email) VALUES
     (1, 'student1', 'fa618ff05c687488bd740bd958a03380b47f75d61bd2172afa428954df92b55b', '1pdj4md7n24zr5u3wy3olp1r1a6p7otw', 'student1@mail.com'),
-	(2, 'student2', 'de67fbed51baa01ec9843db58bffafd28dfb02619875626002ccfe4533d353a1', 'k974s9egj23sujb7jhltggqh0dnss2eh', 'student2@mail.com'),
+    (2, 'student2', 'de67fbed51baa01ec9843db58bffafd28dfb02619875626002ccfe4533d353a1', 'k974s9egj23sujb7jhltggqh0dnss2eh', 'student2@mail.com'),
     (3, 'student3', 'f5a05548ea49258d40eecf7afabc04b55f68953d5dc67bfd9dc90df7b51c7574', 'nhug7j4pps5zjceyjzgan5ftbnnngipf', 'student3@mail.com'),
-	(4, 'student4', '397080a248bf517bfbe5b3b994eb566cd37e8cb24121331c14ee92b351bcbb80', '7qk5hbkh2hpo7252ncuv2mxpk8mded0p', 'student4@mail.com'),
+    (4, 'student4', '397080a248bf517bfbe5b3b994eb566cd37e8cb24121331c14ee92b351bcbb80', '7qk5hbkh2hpo7252ncuv2mxpk8mded0p', 'student4@mail.com'),
     (5, 'student5', 'e744fd8303d95446446aaffc9ebc321f22bcbdbf2cd5419526bd0cbd1ef65920', 'hlejo01eq93t1862nxmr1a4cv6naypw7', 'student5@mail.com'),
-	(6, 'student6', 'a6fa7595806d1b9b971d5676600bb4fbdd7297c6c998a6f326bf2c9013522aaa', 'vkvw3thggkw8vbgjtzz5px8eztlrvcji', 'student6@mail.com'),
+    (6, 'student6', 'a6fa7595806d1b9b971d5676600bb4fbdd7297c6c998a6f326bf2c9013522aaa', 'vkvw3thggkw8vbgjtzz5px8eztlrvcji', 'student6@mail.com'),
     (7, 'student7', 'e4f6c53a2ac696f0b788e8ae9559f5a7d490e7516d68b99d2e401223d199eb95', 'g6mr1ki2acyp6x3yjsb59hscei665gw3', 'student7@mail.com'),
-	(8, 'student8', '1d897ca84ebdc0306ce6a174b7046b68c9b26cdb0484f0f72b6bc08fa2da5d64', 'y8u3n885aghdc2jw4s0u888uqvkxnec7', 'student8@mail.com'),
+    (8, 'student8', '1d897ca84ebdc0306ce6a174b7046b68c9b26cdb0484f0f72b6bc08fa2da5d64', 'y8u3n885aghdc2jw4s0u888uqvkxnec7', 'student8@mail.com'),
     (9, 'student9', '4038a883f19299ba24169b7cede15b299f7e5e30bc082601391978cb197fef74', 'bjg3r5e5hi8s5twkm9pwif5cfcjps74h', 'student9@mail.com'),
-	(10, 'student10', '432fc1b8bd3a4fa81895a321f0c7bac68d02d16de4e89757e55d143958a69196', 'lbw50wgv28lsgl7vor3pl95p2lvdc6a0 ', 'student10@mail.com');
+    (10, 'student10', '432fc1b8bd3a4fa81895a321f0c7bac68d02d16de4e89757e55d143958a69196', 'lbw50wgv28lsgl7vor3pl95p2lvdc6a0', 'student10@mail.com');
 
-CREATE TABLE IF NOT EXISTS `user_provider` (
-  `upr_usr_id` int(10) unsigned NOT NULL,
-  `upr_prv_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`upr_usr_id`,`upr_prv_id`),
-  KEY `FK_UPR_USR` (`upr_usr_id`),
-  CONSTRAINT `FK_UPR_USR` FOREIGN KEY (`upr_usr_id`) REFERENCES `user` (`usr_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_UPR_PRV` FOREIGN KEY (`upr_prv_id`) REFERENCES `provider` (`prv_id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO user_provider (upr_usr_id, upr_prv_id) VALUES
+    (1, 1), (1, 2),
+    (2, 3), (2, 4),
+    (3, 5), (3, 6),
+    (4, 7), (4, 8),
+    (5, 9), (5, 10),
+    (6, 11), (6, 12),
+    (7, 13), (7, 14),
+    (8, 15), (8, 16),
+    (9, 17), (9, 18),
+    (10, 19), (10, 20);
 
-DELETE FROM `user_provider`;
-INSERT INTO `user_provider` (`upr_usr_id`, `upr_prv_id`) VALUES
-	(1, 1),
-	(1, 2),
-	(2, 3),
-	(2, 4),
-	(3, 5),
-	(3, 6),
-	(4, 7),
-	(4, 8),
-	(5, 9),
-	(5, 10),
-	(6, 11),
-	(6, 12),
-	(7, 13),
-	(7, 14),
-	(8, 15),
-	(8, 16),
-	(9, 17),
-	(9, 18),
-	(10, 19),
-	(10, 20);
+-- Seed rows used explicit ids, which does NOT advance the SERIAL sequences.
+-- Bump each sequence past the seeded max so future inserts don't collide.
+SELECT setval('provider_prv_id_seq', (SELECT MAX(prv_id) FROM provider));
+SELECT setval('account_act_id_seq',  (SELECT MAX(act_id) FROM account));
+SELECT setval('user_usr_id_seq',     (SELECT MAX(usr_id) FROM "user"));

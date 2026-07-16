@@ -1,43 +1,37 @@
-const mysql = require('mysql');
+const { Pool } = require('pg');
 
-
-let connection;
+let pool;
 
 exports.getDatabaseConnection = () => {
-  if(!connection) {
-    connection = mysql.createPool({
+  if (!pool) {
+    pool = new Pool({
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DATABASE,
-      charset: process.env.DB_CHARSET
-    })
+      user: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      database: process.env.POSTGRES_DB
+    });
   }
-  return connection;
+  return pool;
 };
 
+// Promise-based query helper. Uses numbered placeholders ($1, $2, ...).
+// Resolves with { results, fields } so callers can destructure `results`
+// (the returned rows) the same way across every DAO.
 exports.query = (query, params = []) => {
-  return new Promise((resolve, reject) => {
-    if(!connection) {
-      connection = exports.getDatabaseConnection();
-    }
-    connection.query(query, params, (err, results, fields) => {
-      if(err) {
-        reject(err);
-        return;
-      }
-      resolve({
-        results: results,
-        fields: fields
-      })
-    })
-  });
+  const db = exports.getDatabaseConnection();
+  return db.query(query, params).then(res => ({
+    results: res.rows,
+    // pg does not have mysql's insertId/affectedRows; expose rowCount so
+    // DAOs can check how many rows an INSERT/UPDATE/DELETE touched.
+    rowCount: res.rowCount,
+    fields: res.fields
+  }));
 };
 
 exports.close = () => {
-  if(connection) {
-    connection.end();
-    connection = null;
+  if (pool) {
+    pool.end();
+    pool = null;
   }
 };
