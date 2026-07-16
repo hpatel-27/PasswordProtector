@@ -56,6 +56,11 @@ JWT-based (`api/src/middleware/TokenMiddleware.js`). On login, `generateToken` s
 
 Column names are prefixed per table: `usr_*` (user), `prv_*` (provider), `act_*` (account), `upr_*` (user_provider join). A user owns providers through the `user_provider` many-to-many table; an account belongs to one provider (`account.prv_id`, `ON DELETE CASCADE`). This lets one user store multiple accounts per site.
 
-### Planned follow-up: account-password encryption
+### Account-password encryption
 
-The stored account passwords (`account.act_password`) are still plaintext. The plan is to encrypt them at rest with **reversible** encryption (AES-256-GCM), not hash them — a password manager must be able to show the user their stored password. The `act_password` column is already widened to `VARCHAR(512)` to hold ciphertext. This is intentionally the last change to make.
+Stored account passwords (`account.act_password`, `VARCHAR(512)`) are encrypted at rest with **reversible** AES-256-GCM (`db/encryption.js`), **not** hashed — a password manager must be able to show the user their stored password. This is distinct from *login* passwords, which are one-way pbkdf2 hashes (see Auth).
+
+- `encryption.js` exposes `encrypt`/`decrypt`. Ciphertext is stored as `gcmv1:<iv>:<authTag>:<ciphertext>` (all base64); the `gcmv1` header is a version marker.
+- The 32-byte key comes from `ACCOUNT_ENCRYPTION_KEY` (base64) and is validated on first use. Generate one with `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`.
+- `AccountDAO` encrypts on INSERT/UPDATE and decrypts on read (via its `toAccount` helper). `decrypt` passes through any value lacking the `gcmv1:` header, so the plaintext demo-seed rows in `pw_protector.sql` still display without a migration step.
+- GCM is authenticated: a tampered or wrong-key ciphertext throws on decrypt rather than returning garbage. Rotating `ACCOUNT_ENCRYPTION_KEY` invalidates all previously encrypted rows.
