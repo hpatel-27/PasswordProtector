@@ -43,11 +43,13 @@ exports.TokenMiddleware = (req, res, next) => {
 }
 
 
+const TOKEN_TTL_SECONDS = 60 * 60; // 1 hour
+
 exports.generateToken = (req, res, user) => {
   let data = {
     user: user,
-    // Use the exp registered claim to expire token in 1 hour
-    exp: Math.floor(Date.now() / 1000) + (10 * 60)
+    // Use the exp registered claim to expire the token in 1 hour
+    exp: Math.floor(Date.now() / 1000) + TOKEN_TTL_SECONDS
   }
 
   const token = jwt.sign(data, API_SECRET);
@@ -55,8 +57,11 @@ exports.generateToken = (req, res, user) => {
   //send token in cookie to client
   res.cookie(TOKEN_COOKIE_NAME, token, {
     httpOnly: true,
-    secure: true,
-    maxAge: 10 * 60 * 1000 //This session expires in 2 minutes.. but token expires in 1 hour!
+    // `secure` requires HTTPS; disable it for local http dev so the browser
+    // will actually send the cookie back. Enable in production.
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: TOKEN_TTL_SECONDS * 1000 // keep cookie lifetime in sync with the token
   });
 };
 
@@ -65,7 +70,8 @@ exports.removeToken = (req, res) => {
   //send session ID in cookie to client
   res.cookie(TOKEN_COOKIE_NAME, "", {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
     maxAge: -360000 //A date in the past
   });
 
