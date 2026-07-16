@@ -27,19 +27,17 @@ Method | Route                 | Description
 `DELETE`  | `/providers/:providerId/accounts/:accountId`      | Removes an account from the provider
 `PUT`  | `/accounts/:providerId/:accountId`      | Changes the field of the account provided by id
 
-To run this program you will need to make a .env file in the Final Project folder after cloning it.
+To run this program, copy `FinalProject/.env.example` to `FinalProject/.env` and fill in real values, then run `docker compose up --build` from the `FinalProject` folder.
 
-It should contain these fields:
+The `.env` should contain these fields:
 
 ```bash
-MYSQL_ROOT_PASSWORD=
-MYSQL_DATABASE=
-MYSQL_USER=
-MYSQL_PASSWORD=
-DB_ENGINE=
-DB_HOST=
-DB_PORT=
-DB_CHARSET=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
 
-PORT=
+DB_HOST=database
+DB_PORT=5432
+
+PORT=80
 API_SECRET_KEY=
