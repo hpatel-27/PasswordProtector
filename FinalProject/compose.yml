@@ -6,6 +6,9 @@ services:
       - ./proxy/default.conf.template:/etc/nginx/templates/default.conf.template
     ports:
       - "80:80"
+    depends_on:
+      - frontend
+      - api
 
   api:
     build:
@@ -17,24 +20,26 @@ services:
       - PORT=80
     env_file:
       - .env
+    depends_on:
+      database:
+        condition: service_healthy
 
   frontend:
     build: ./frontend
     restart: unless-stopped
-    volumes:
-      - ./frontend/static:/app/static
-      - ./frontend/templates:/app/templates   
-      - ./frontend/src:/app/src
-    environment:
-      - PORT=80
 
   database:
-    image: mariadb:10.6
+    image: postgres:16
     restart: unless-stopped
     ports:
-      - 3307:3306
+      - "5433:5432"
     volumes:
-      - "./database/data:/var/lib/mysql"
+      - "./database/data:/var/lib/postgresql/data"
       - "./database/db_schema:/docker-entrypoint-initdb.d"
     env_file:
       - .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
