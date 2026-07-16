@@ -1,16 +1,12 @@
-FROM node:lts
-# Set working directory
+# Build the React app, then serve the static output with nginx.
+FROM node:lts AS build
 WORKDIR /app
-
-RUN npm install -g nodemon
-
-# install node modules
-COPY ./package*.json .
+COPY package*.json ./
 RUN npm install
-
-# Copy all files from current directory to working dir in image
 COPY . .
+RUN npm run build
 
-ENV PORT 80
-
-ENTRYPOINT [ "npm", "start" ]
+FROM nginx:latest
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80

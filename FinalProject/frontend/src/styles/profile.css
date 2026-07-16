@@ -1,0 +1,86 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #5094a9;
+  height: 100vh;
+}
+
+.profile-container .main-content {
+  text-align: center;
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #dddddd;
+}
+
+.profile-container .main-header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 6%;
+}
+
+.profile-container .card-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-container .profile-info {
+  background-color: #ffffff;
+  padding: 7%;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  width: 45%;
+  align-content: center;
+  margin-left: 27%;
+}
+
+.profile-container .profile-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.profile-container .profile-info p {
+  color: black;
+  text-align: left;
+}
+
+.profile-container .sign-out-btn,
+.profile-container .update-profile-btn {
+  display: block;
+  width: 30%;
+  padding: 10px;
+  margin-top: 3%;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(49, 49, 48);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  color: white;
+  cursor: pointer;
+}
+
+.profile-container #sign-out:hover {
+  background-color: rgb(31, 31, 31);
+}
+
+.profile-container #logo-img {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.profile-container #logo-container {
+  background-color: rgba(255, 255, 255, 0);
+  min-width: 7vw;
+  width: 7vw;
+}
+
+@media (min-width: 768px) {
+  .profile-container {
+    flex-direction: row;
+  }
+
+  .profile-container .main-content {
+    width: 70%;
+  }
+}
