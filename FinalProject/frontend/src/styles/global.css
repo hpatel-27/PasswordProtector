@@ -1,18 +1,66 @@
-* {
-  box-sizing: border-box;
+@import 'tailwindcss';
+
+/* =========================================================================
+   Design tokens — ocean-blue primary, system font. Neutral (slate) borders
+   are applied explicitly via utilities (no tinted borders); no gradients.
+   ========================================================================= */
+@theme {
+  --color-ocean-50: #eef6fb;
+  --color-ocean-100: #d6ebf6;
+  --color-ocean-200: #b3d9ee;
+  --color-ocean-500: #0a7ab5;
+  --color-ocean-600: #0a6ea5;
+  --color-ocean-700: #085a86;
+  --color-ocean-800: #074a6e;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  font-family: Arial, sans-serif;
+@layer base {
+  html,
+  body {
+    @apply min-h-full;
+  }
+
+  body {
+    @apply bg-slate-100 font-sans text-slate-900 antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-bold tracking-tight;
+  }
 }
 
-#errorbox {
-  color: #b00020;
-  text-align: center;
-  margin: 10px 0;
-  font-weight: bold;
+/* Reusable component classes (buttons + form controls) so markup stays clean. */
+@layer components {
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-[18px] py-2.5 text-[0.95rem] font-semibold leading-tight no-underline transition-colors;
+  }
+  .btn:focus-visible {
+    @apply outline-none ring-[3px] ring-ocean-600/30;
+  }
+  .btn:disabled,
+  .btn[aria-disabled='true'] {
+    @apply cursor-not-allowed opacity-60;
+  }
+  .btn-primary {
+    @apply bg-ocean-600 text-white hover:bg-ocean-700 hover:text-white hover:no-underline active:bg-ocean-800;
+  }
+  .btn-secondary {
+    @apply border-slate-300 bg-white text-slate-900 hover:bg-slate-50 hover:text-slate-900 hover:no-underline;
+  }
+  .btn-danger {
+    @apply border-slate-300 bg-white text-red-600 hover:border-red-600 hover:bg-red-600 hover:text-white hover:no-underline;
+  }
+
+  .input {
+    @apply w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-[0.95rem] text-slate-900 transition placeholder:text-slate-400 focus:border-ocean-600 focus:outline-none focus:ring-[3px] focus:ring-ocean-600/30;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-sm font-semibold text-slate-500;
+  }
 }
