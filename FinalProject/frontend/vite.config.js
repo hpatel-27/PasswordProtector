@@ -1,11 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
 // During `vite dev`, proxy /api to the API so the SPA can be developed outside
 // Docker without CORS. In the Docker stack, the built static files are served
 // behind the shared nginx proxy, which handles /api routing instead.
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   server: {
     proxy: {
       '/api': {

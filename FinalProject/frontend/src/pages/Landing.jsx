@@ -1,43 +1,29 @@
 import { Link } from 'react-router-dom';
-import '../styles/landing.css';
-
-const logo = '/images/managerlogomedium.png';
+import PageHeader from '../components/PageHeader.jsx';
 
 export default function Landing() {
   return (
-    <div className="landing-page">
-      <header>
-        <div className="main-header">
-          <a className="btn btn-primary" role="button" id="logo-container">
-            <img src={logo} alt="" id="logo-img" />
-          </a>
-        </div>
-      </header>
-      <main className="container text-center">
-        <h1>Welcome to Password Protector</h1>
-        <p>Your reliable and secure password management solution.</p>
+    <div className="flex min-h-screen flex-col bg-slate-100">
+      <PageHeader />
 
-        <div className="row mt-4">
-          <div className="col">
-            <p>
-              Dont have an account?
-              <br />
-              <Link to="/signup" className="btn btn-primary" id="signupBtn">
-                Sign Up
-              </Link>
-            </p>
+      <main className="flex flex-1 items-center justify-center px-5 py-12">
+        <section className="w-full max-w-2xl rounded-2xl border border-slate-200 bg-white px-12 py-14 text-center shadow-md">
+          <h1 className="mb-4 text-4xl leading-tight">
+            Keep every password safe and within reach
+          </h1>
+          <p className="mx-auto mb-8 max-w-md text-lg text-slate-500">
+            A simple, secure home for your logins. Store accounts by provider,
+            encrypted at rest and ready when you need them.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link to="/signup" className="btn btn-primary min-w-[150px] px-6 py-3" id="signupBtn">
+              Get started
+            </Link>
+            <Link to="/login" className="btn btn-secondary min-w-[150px] px-6 py-3" id="loginBtn">
+              Log in
+            </Link>
           </div>
-
-          <div className="col">
-            <p>
-              Have an account?
-              <br />
-              <Link to="/login" className="btn btn-primary" id="loginBtn">
-                Log In
-              </Link>
-            </p>
-          </div>
-        </div>
+        </section>
       </main>
     </div>
   );
